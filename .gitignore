@@ -1,0 +1,4 @@
+dbt_course/target/
+dbt_course/dbt_packages/
+logs/
+venv/
