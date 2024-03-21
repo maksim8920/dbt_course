@@ -1,0 +1,30 @@
+version: 2
+
+sources:
+  - name: task_tracker
+    schema: stg
+    tables:
+      - name: tasks
+        description: Сырой JSON с данными о задачах
+      - name: users
+        description: Сырой JSON с данными о сотрудниках
+      - name: task_fields
+        description: Сырой JSON с данными о полях задач
+      - name: task_types
+        description: Сырой JSON с данными о типах задач
+      - name: statuses
+        description: Сырой JSON с данными о статусах задач
+      - name: queues
+        description: Сырой JSON с данными об очередях
+      - name: priorities
+        description: Сырой JSON с данными о приоритетах
+      - name: link_types
+        description: Сырой JSON с данными о типах ссылок между задачами
+      - name: components
+        description: Сырой JSON с данными о компонентах задач
+      - name: comments
+        description: Сырой JSON с данными о комментариях
+      - name: change_log
+        description: Сырой JSON с данными об истории изменений задачи
+      - name: boards
+        description: Сырой JSON с данными о досках

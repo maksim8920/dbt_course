@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: dds_model_users
+    description: Данные о пользователях трекера
+    columns: 
+      - name: user_uid_sk
+        description: Суррогатный ключ для построения связей в аналитическом хранилище
+        tests:
+          - unique
+          - not_null
+      - name: user_uid_bk
+        description: Бизнес ключ из источника
+        tests:
+          - unique
+          - not_null
