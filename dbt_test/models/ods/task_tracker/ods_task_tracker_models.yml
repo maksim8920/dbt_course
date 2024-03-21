@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: ods_model_boards
+    description: Распаршенные данные о досках
+  - name: ods_model_users
+    description: Распаршенные данные о пользователях
+  - name: ods_model_task_types
+    description: Распаршенные данные о типах задач
+  - name: ods_model_task_fields
+    description: Распаршенные данные о полях задачи
+  - name: ods_model_statuses
+    description: Распаршенные данные о статусах
+  - name: ods_model_queues
+    description: Распаршенные данные об очередях
+  - name: ods_model_priorities
+    description: Распаршенные данные о приоритетах
+  - name: ods_model_link_types
+    description: Распаршенные данные о типах ссылок между задачами
+  - name: ods_model_components
+    description: Распаршенные данные о компонентах
+  - name: ods_model_comments
+    description: Распаршенные данные о комментариях
+  - name: ods_model_change_log_links
+    description: Распаршенные данные об истории изменений связей задачи
+  - name: ods_model_change_log_fields
+    description: Распаршенные данные об истории изменений задачи
+  - name: ods_model_change_log_comments
+    description: Распаршенные данные об истории изменений комментариев
