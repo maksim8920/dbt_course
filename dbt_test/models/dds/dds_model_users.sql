@@ -1,7 +1,9 @@
 {{
     config(
         materialized='incremental',
-        unique_key='user_uid_bk'
+        unique_key='user_uid_bk',
+        incremental_strategy = 'merge',
+        merge_update_columns = ['name', 'email']
     )
 }}
 

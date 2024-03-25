@@ -3,7 +3,7 @@ SELECT
 	task_value->>'summary' AS title,
 	task_value->>'description' AS description,
 	(task_value->>'createdAt')::timestamptz AT TIME ZONE 'Europe/Moscow' AS created_at,
-	(task_value->>'updatedAt')::timestamptz AT TIME ZONE 'Europe/Moscow' AS updatedAt,
+	(task_value->>'updatedAt')::timestamptz AT TIME ZONE 'Europe/Moscow' AS updated_at,
 	(task_value->>'resolvedAt')::timestamptz AT TIME ZONE 'Europe/Moscow' AS resolved_at,
 	(task_value->'createdBy')->>'id' AS created_by,
 	(task_value->'assignee')->>'id' AS assignee,

@@ -37,7 +37,7 @@ models:
       +materialized: view
       +schema: ods
     dds:
-      +materialized: table
+      +materialized: incremental
       +schema: dds
     marts:
       +materialized: table

@@ -27,3 +27,5 @@ models:
     description: Распаршенные данные об истории изменений задачи
   - name: ods_model_change_log_comments
     description: Распаршенные данные об истории изменений комментариев
+  - name: ods_model_tasks
+    description: Распаршенные данные об истории изменений комментариев

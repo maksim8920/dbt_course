@@ -14,3 +14,327 @@ models:
         tests:
           - unique
           - not_null
+  - name: dds_model_statuses
+    description: Данные о статусах задач трекера
+    columns: 
+      - name: status_uid_sk
+        description: Суррогатный ключ для построения связей в аналитическом хранилище
+        tests:
+          - unique
+          - not_null
+      - name: status_uid_bk
+        description: Бизнес ключ из источника
+        tests:
+          - unique
+          - not_null
+  - name: dds_model_boards
+    description: Данные о досках трекера
+    columns: 
+      - name: board_uid_sk
+        description: Суррогатный ключ для построения связей в аналитическом хранилище
+        tests:
+          - unique
+          - not_null
+      - name: board_uid_bk
+        description: Бизнес ключ из источника
+        tests:
+          - unique
+          - not_null
+  - name: dds_model_task_types
+    description: Данные о типах задач
+    columns: 
+      - name: task_type_uid_sk
+        description: Суррогатный ключ для построения связей в аналитическом хранилище
+        tests:
+          - unique
+          - not_null
+      - name: task_type_uid_bk
+        description: Бизнес ключ из источника
+        tests:
+          - unique
+          - not_null
+  - name: dds_model_priorities
+    description: Данные о приоритетах задача
+    columns: 
+      - name: priority_uid_sk
+        description: Суррогатный ключ для построения связей в аналитическом хранилище
+        tests:
+          - unique
+          - not_null
+      - name: priority_uid_bk
+        description: Бизнес ключ из источника
+        tests:
+          - unique
+          - not_null
+  - name: dds_model_link_types
+    description: Данные о типах связей между задачами
+    columns: 
+      - name: link_uid_sk
+        description: Суррогатный ключ для построения связей в аналитическом хранилище
+        tests:
+          - unique
+          - not_null
+      - name: link_uid_bk
+        description: Бизнес ключ из источника
+        tests:
+          - unique
+          - not_null
+  - name: dds_model_task_fields
+    description: Данные о полях задач
+    columns: 
+      - name: task_field_uid_sk
+        description: Суррогатный ключ для построения связей в аналитическом хранилище
+        tests:
+          - unique
+          - not_null
+      - name: task_field_uid_bk
+        description: Бизнес ключ из источника
+        tests:
+          - unique
+          - not_null
+  - name: dds_model_queues
+    description: Данные об очередях
+    columns: 
+      - name: queue_uid_sk
+        description: Суррогатный ключ для построения связей в аналитическом хранилище
+        tests:
+          - unique
+          - not_null
+      - name: queue_uid_bk
+        description: Бизнес ключ из источника
+        tests:
+          - unique
+          - not_null
+      - name: key
+        description: "{{ doc('queues_keys') }}"
+      - name: created_by
+        description: Внешний ключ к dds_model_users.user_uid_sk
+        tests:
+          - relationships:
+              to: ref('dds_model_users')
+              field: user_uid_sk
+  - name: dds_model_components
+    description: Данные о компонентах задач
+    columns: 
+      - name: component_uid_sk
+        description: Суррогатный ключ для построения связей в аналитическом хранилище
+        tests:
+          - unique
+          - not_null
+      - name: component_uid_bk
+        description: Бизнес ключ из источника
+        tests:
+          - unique
+          - not_null
+      - name: created_by
+        description: Внешний ключ к dds_model_users.user_uid_sk
+        tests:
+          - relationships:
+                to: ref('dds_model_users')
+                field: user_uid_sk
+      - name: queue
+        description: Внешний ключ к dds_model_queues.queue_uid_sk
+        tests:
+          - relationships:
+              to: ref('dds_model_queues')
+              field: queue_uid_sk
+  - name: dds_model_tasks
+    description: Данные о задаче
+    columns: 
+      - name: task_uid_sk
+        description: Суррогатный ключ для построения связей в аналитическом хранилище
+        tests:
+          - unique
+          - not_null
+      - name: task_uid_bk
+        description: Бизнес ключ из источника
+        tests:
+          - unique
+          - not_null
+      - name: created_by
+        description: Автор задачи, внешний ключ к dds_model_users.user_uid_sk
+        tests:
+          - relationships:
+              to: ref('dds_model_users')
+              field: user_uid_sk
+      - name: assignee
+        description: Исполнитель задачи, внешний ключ к dds_model_users.user_uid_sk
+        tests:
+          - relationships:
+              to: ref('dds_model_users')
+              field: user_uid_sk
+      - name: resolved_by
+        description: Закрывший задачу, внешний ключ к dds_model_users.user_uid_sk
+        tests:
+          - relationships:
+              to: ref('dds_model_users')
+              field: user_uid_sk
+      - name: type
+        description: Тип задачи, внешний ключ к dds_model_task_types.task_type_uid_sk
+        tests:
+          - relationships:
+              to: ref('dds_model_task_types')
+              field: task_type_uid_sk
+      - name: status
+        description: Статус задачи, внешний ключ к dds_model_statuses.status_uid_sk
+        tests:
+          - relationships:
+              to: ref('dds_model_statuses')
+              field: status_uid_sk
+      - name: priority
+        description: Приоритет задачи, внешний ключ к dds_model_priorities.priority_uid_sk
+        tests:
+          - relationships:
+              to: ref('dds_model_priorities')
+              field: priority_uid_sk
+      - name: queue
+        description: Очередь задачи, внешний ключ к dds_model_queues.queue_uid_sk
+        tests:
+          - relationships:
+              to: ref('dds_model_queues')
+              field: queue_uid_sk
+  - name: dds_model_comments
+    description: Данные о комментариях к задачам
+    tests: 
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+          - task_id
+          - comment_uid_bk
+    columns: 
+      - name: comment_uid_sk
+        description: Суррогатный ключ для построения связей в аналитическом хранилище
+        tests:
+          - unique
+          - not_null
+      - name: task_id
+        description: Внешний ключ к dds_model_tasks.task_uid_sk
+        tests:
+          - relationships:
+              to: ref('dds_model_tasks')
+              field: task_uid_sk
+      - name: created_by
+        description: Автор комментария, внешний ключ к dds_model_users.user_uid_sk
+        tests:
+          - relationships:
+              to: ref('dds_model_users')
+              field: user_uid_sk
+      - name: updated_by
+        description: Автор изменения комментария, внешний ключ к dds_model_users.user_uid_sk
+        tests:
+          - relationships:
+              to: ref('dds_model_users')
+              field: user_uid_sk
+  - name: dds_model_task_followers
+    description: Данные о наблюдателях
+    tests: 
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+          - task_id
+          - follower_id
+    columns:
+      - name: task_id
+        description: Внешний ключ к dds_model_tasks.task_uid_sk
+        tests:
+          - relationships:
+              to: ref('dds_model_tasks')
+              field: task_uid_sk
+      - name: follower_id
+        description: Внешний ключ к dds_model_users.user_uid_sk
+        tests:
+          - relationships:
+              to: ref('dds_model_users')
+              field: user_uid_sk
+  - name: dds_model_task_boards
+    description: Данные о досках
+    tests: 
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+          - task_id
+          - board_id
+    columns:
+      - name: task_id
+        description: Внешний ключ к dds_model_tasks.task_uid_sk
+        tests:
+          - relationships:
+              to: ref('dds_model_tasks')
+              field: task_uid_sk
+      - name: board_id
+        description: Внешний ключ к dds_model_boards.board_uid_sk
+        tests:
+          - relationships:
+              to: ref('dds_model_boards')
+              field: board_uid_sk
+  - name: dds_model_task_tags
+    description: Данные о тегах
+    tests: 
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+          - task_id
+          - tag
+    columns:
+      - name: task_id
+        description: Внешний ключ к dds_model_tasks.task_uid_sk
+        tests:
+          - relationships:
+              to: ref('dds_model_tasks')
+              field: task_uid_sk
+  - name: dds_model_change_log_links
+    description: История изменений связей между задачами
+    tests: 
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+          - task_id
+          - change_id
+    columns:
+      - name: task_id
+        description: Внешний ключ к dds_model_tasks.task_uid_sk
+        tests:
+          - relationships:
+              to: ref('dds_model_tasks')
+              field: task_uid_sk
+      - name: change_from
+        description: Внешний ключ к dds_model_link_types.link_uid_sk
+        tests:
+          - relationships:
+              to: ref('dds_model_link_types')
+              field: link_uid_sk
+      - name: change_to
+        description: Внешний ключ к dds_model_link_types.link_uid_sk
+        tests:
+          - relationships:
+              to: ref('dds_model_link_types')
+              field: link_uid_sk
+      - name: updated_by
+        description: Внешний ключ к dds_model_users.user_uid_sk
+        tests:
+          - relationships:
+              to: ref('dds_model_users')
+              field: user_uid_sk
+  - name: dds_model_change_log_fields
+    description: История изменений связей между задачами
+    tests: 
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+          - task_id
+          - change_id
+    columns:
+      - name: task_id
+        description: Внешний ключ к dds_model_tasks.task_uid_sk
+        tests:
+          - relationships:
+              to: ref('dds_model_tasks')
+              field: task_uid_sk
+      - name: change_field_id
+        description: Внешний ключ к dds_model_task_fields.task_field_uid_sk
+        tests:
+          - relationships:
+              to: ref('dds_model_task_fields')
+              field: task_field_uid_sk
+      - name: updated_by
+        description: Внешний ключ к dds_model_users.user_uid_sk
+        tests:
+          - relationships:
+              to: ref('dds_model_users')
+              field: user_uid_sk
+          
+  
